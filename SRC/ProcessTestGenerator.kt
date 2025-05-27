@@ -1,16 +1,16 @@
-
-//class of ProcessObject that will be added to the TestGenerator
-class ProcessObject(var arrivalTime: Int, var executionTime : Int){
-    //Function for decrementing the value of the object
-    fun decrement(timeQuantProvided : Int){
-        var executionTime = executionTime - timeQuantProvided
+class ProcessTestGenerator{
+    //class of ProcessObject that will be added to the TestGenerator
+    class ProcessObject(var arrivalTime: Int, var executionTime : Int){
+        //Function for decrementing the value of the object
+        fun decrement(timeQuantProvided : Int){
+            var executionTime = executionTime - timeQuantProvided
+        }
     }
-}
-
-/*initialize class of TestGenerator that will provide
-the simulations with certain amount of objects 
-of certain arrival time, execution time*/
-class TestGenerator(var processAmount: Int, var case : Int){
+    
+    /*initialize class of TestGenerator that will provide
+    the simulations with certain amount of objects 
+    of certain arrival time, execution time*/
+    class TestGenerator(var processAmount: Int, var case : Int){
     //initializes array for ProcessObjects
     var processArray = Array<ProcessObject?>(processAmount) {null}
     
@@ -18,7 +18,7 @@ class TestGenerator(var processAmount: Int, var case : Int){
     fun fillProcessArray(){
         when(case){
             1 -> fullRandom()
-            2 -> radnomExecution()
+            2 -> randomExecution()
             3 -> randomArrival()
         }
     }
@@ -28,7 +28,7 @@ class TestGenerator(var processAmount: Int, var case : Int){
         var i : Int = 0
         while(i < processAmount){
             //randomize ProcessObject.arrivalTime
-            var randomA = (1..10).shuffled().first()
+            var randomA = (0..10).shuffled().first()
             //randomize ProcessObject.executionTime
             var randomB = (1..10).shuffled().first()
             //creates an object with set variables
@@ -42,7 +42,7 @@ class TestGenerator(var processAmount: Int, var case : Int){
         var i : Int = 0
         while(i < processAmount){
             //randomize ProcessObject.arrivalTime
-            var randomA = (1..10).shuffled().first()
+            var randomA = (0..10).shuffled().first()
             //the same execution time for all ProcessObjects
             var fixed : Int = 5
             //creates an object with set variables
@@ -52,11 +52,11 @@ class TestGenerator(var processAmount: Int, var case : Int){
     }
 
     //function for random execution time
-    fun radnomExecution(){
+    fun randomExecution(){
         var i : Int = 0
         while(i < processAmount){
             //the same arrival time for all ProcessObjects
-            var fixed = 2
+            var fixed = 0
             //randomize ProcessObject.executionTime
             var randomB = (1..10).shuffled().first()
             //creates an object with set variables
@@ -64,5 +64,6 @@ class TestGenerator(var processAmount: Int, var case : Int){
             i++
         }
     }
+}
 
 }
