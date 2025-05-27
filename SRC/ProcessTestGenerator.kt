@@ -39,7 +39,7 @@ class TestGenerator(var processAmount: Int, var case : Int){
 
     //function for random arrival time 
     fun randomArrival(){
-                var i : Int = 0
+        var i : Int = 0
         while(i < processAmount){
             //randomize ProcessObject.arrivalTime
             var randomA = (1..10).shuffled().first()
@@ -60,18 +60,9 @@ class TestGenerator(var processAmount: Int, var case : Int){
             //randomize ProcessObject.executionTime
             var randomB = (1..10).shuffled().first()
             //creates an object with set variables
-            processArray[i] = ProcessObject(randomA, randomB)
+            processArray[i] = ProcessObject(fixed, randomB)
             i++
         }
     }
-
-}
-
-
-fun main(){
-    val generated = TestGenerator(5, 1)
-    generated.fillProcessArray()
-    println(generated.processArray[0]?.executionTime)
-
 
 }
