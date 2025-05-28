@@ -1,8 +1,8 @@
 import java.util.*
 
-class RoundRobin(){
+class RoundRobin{
   //starts the process of executing the processes
-  class startExecution(){
+  class startExecution{
     //establish a time quant for each round
     val timeQuant : Int = 3
 
@@ -50,7 +50,7 @@ class RoundRobin(){
 
 
 fun main(){
-    var generator = ProcessTestGenerator.TestGenerator(10, 1)
+    var generator = ProcessTestGenerator.TestGenerator(100, 1)
     generator.fillProcessArray()
     var array = generator.processArray
     println("Before sort")
