@@ -1,33 +1,59 @@
-/*Variables and function definitions that are similar or present to the 
-RoundRobin algoritm such as flag or turn counter may have less explenation 
-in their coment as this feature has been developed after the RoundRobin algorithm.
-Some coments however will still be present to maintain code readability*/
+import java.util.*
 
 class SJF{
     class startExecution{
-        var turnCounter = 0
-        
+        //time quant to subtract from execution time
+        var timeQuant = 1
+        //counts the current time quant
+        var turnCounter = 0        
+        //flag for stopping the funcition
         var flag = 0
-        
+        //creation of empty queue with global access
+        var processQueue : Queue<ProcessTestGenerator.ProcessObject?> = LinkedList()
+
+        //execution of the shortest processs
         fun executioner(processArray : Array<ProcessTestGenerator.ProcessObject?>){
-
-
-
-
-
+            //starts repeating the execution until the flag is changed
+            while(flag == 0){
+                //call for queue creator
+                queueCreator(processArray, turnCounter)
+                //starts the substraction until process is finished
+                if(processQueue.isEmpty() == false){
+                    while(processQueue.peek()!!.executionTime > 0){
+                        processQueue.peek()!!.executionTime = processQueue.peek()!!.executionTime - timeQuant
+                        //tracks current time
+                        turnCounter = turnCounter + timeQuant
+                    }
+                    //empties the queue for the next process
+                    processQueue.poll()
+                }
+            }
         }
 
         fun queueCreator(processArray : Array<ProcessTestGenerator.ProcessObject?>, turnCounter : Int){
+            //variable with arbitrary high number for the shortest job execution time finding
+            var shortestExecution : Int = Int.MAX_VALUE
+            //holder for the process that will be executed
+            var toBeExecuted : ProcessTestGenerator.ProcessObject? = null
+            
             //fill queue
             for (item in processArray){
                 if(item!!.arrivalTime <= turnCounter){
-                    if(item!!.executionTime > 0){
-                        processQueue.add(item)
+                    if(item!!.executionTime > 0 && item!!.executionTime < shortestExecution){
+                        //new shortest execution time
+                        shortestExecution = item!!.executionTime
+                        //new item to be added to the queue
+                        toBeExecuted = item!!
                     }
+                } else {
+                    break
                 }
             } 
-            /*after the completion of the filling
-            if the queue is empty the flag will be changed to 1*/
+            //appends the process to the queue
+            if(toBeExecuted != null){
+                processQueue.add(toBeExecuted)
+            }
+
             if(processQueue.isEmpty()){
                 flag = 1
             }
@@ -44,7 +70,7 @@ fun main(){
         println("Arrival: " + items?.arrivalTime + " Exec: " + items?.executionTime)
     }
 
-    var sort = ExecutionTimeSort.quickSort()
+    var sort = ArrivalTimeSort.quickSort()
     var size = array.size -1
     sort.sort(array, 0, size)
     println("After sort")
@@ -52,13 +78,14 @@ fun main(){
         println("Arrival: " + items?.arrivalTime + " Exec: " + items?.executionTime)
     }
     
-    var shortest = SJF.startExecution()
-    shortest.executioner(array)
+    var shortestJob = SJF.startExecution()
+    shortestJob.executioner(array)
 
     println("After execution")
     for(items in array){
         println("Arrival: " + items?.arrivalTime + " Exec: " + items?.executionTime)
     }
-    println("Turns done: " + robin.turnCounter)
+    println("Total time quants granted: " + shortestJob.turnCounter)
+    println("Total time quants needed: " + generator.telemetryTotalProcessExecutionTime)
 
 }

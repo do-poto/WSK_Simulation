@@ -1,5 +1,5 @@
 class ExecutionTimeSort(){
-    //quicksort implementation for arrival time of a process
+    //quicksort implementation for execution time of a process
     class quickSort{
         //begining of the algorithm
         fun sort(arr : Array<ProcessTestGenerator.ProcessObject?>, low : Int, high : Int){
