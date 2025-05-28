@@ -63,8 +63,16 @@ fun main(){
 
     var mysort = ArrivalTimeSort.quickSort()
     var size = array.size-1
+
+    println("Pre sort")
+    for (x in array){
+        println(x?.arrivalTime)
+    }
     
     mysort.sort(array, 0, size)
-    println(array.contentToString())
+    println("Post sort")
+    for (x in array){
+        println(x?.arrivalTime)
+    }
 
 }
