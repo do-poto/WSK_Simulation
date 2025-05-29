@@ -7,10 +7,11 @@ class FIFO{
             //frame initialized
             var frameQueue : Queue<Int> = LinkedList()
             
+            //creates actual queue size
+            var actualQueueSize : Int = frameQueue.size - 1
+            
             //iterates through all of the proceess in the pagesArray
             for(page in pagesArray){
-                //creates actual queue size
-                var actualQueueSize : Int = frameQueue.size - 1
                 //check if he size is greater than expected
                 if(actualQueueSize >= frameSize){
                     //remove first item
