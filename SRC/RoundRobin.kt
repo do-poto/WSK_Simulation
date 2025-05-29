@@ -5,10 +5,12 @@ class RoundRobin{
   class startExecution{
     //establish a time quant for each round
     val timeQuant : Int = 3
-    //counter for the amount of rounds needed until process completion
+    //counter for the amount of quants used for process completion 
     var turnCounter : Int = 0
     //counts the number of rounds the algorithm has done
     var roundCounter : Int = 0
+    //counts wasted time quants
+    var timeQuantsWasted : Int = 0
     
     /*flag for the RoundRobin, on defualt 0
     if the flag is 0 it will continue the process of distribution
@@ -35,6 +37,11 @@ class RoundRobin{
             }
             roundCounter += 1
         }
+        for(process in processArray){
+            if(process.executionTime < 0){
+                timeQuantsWasted = timeQuantsWasted + process.executionTime
+            }
+        }
     }
     
     //creates a process queue for the executioner
@@ -56,36 +63,4 @@ class RoundRobin{
         }
     }
   }
-}
-
-
-
-fun main(){
-    var generator = ProcessTestGenerator.TestGenerator(100, 1)
-    generator.fillProcessArray()
-    var array = generator.processArray
-    println("Before sort")
-    for(items in array){
-        println("Arrival: " + items?.arrivalTime + " Exec: " + items?.executionTime)
-    }
-
-    var sort = ArrivalTimeSort.quickSort()
-    var size = array.size -1
-    sort.sort(array, 0, size)
-    println("After sort")
-    for(items in array){
-        println("Arrival: " + items?.arrivalTime + " Exec: " + items?.executionTime)
-    }
-    
-    var robin = RoundRobin.startExecution()
-    robin.executioner(array)
-
-    println("After execution")
-    for(items in array){
-        println("Arrival: " + items?.arrivalTime + " Exec: " + items?.executionTime)
-    }
-    println("Total time quants granted: " + robin.turnCounter)
-    println("Total time quants needed: " + generator.telemetryTotalProcessExecutionTime)
-    println("Total numer of rounds: " + robin.roundCounter)
-
 }

@@ -22,6 +22,11 @@ class ProcessTestGenerator{
             1 -> fullRandom()
             2 -> randomExecution()
             3 -> randomArrival()
+            4 -> randomHeavy()
+            else -> {
+                println("Invalid input")
+                exitProcess(-1)
+            } 
         }
     }
 
@@ -69,6 +74,21 @@ class ProcessTestGenerator{
             telemetryTotalProcessExecutionTime = telemetryTotalProcessExecutionTime + randomB
             //creates an object with set variables
             processArray[i] = ProcessObject(fixed, randomB)
+            i++
+        }
+    }
+    //generates fully random processes with heavy execution time
+    fun randomHeavy(){
+        var i : Int = 0
+        //iterates through the whole array of objects
+        while(i < processAmount){
+            //randomize ProcessObject.arrivalTime
+            var randomA = (0..10).shuffled().first()
+            //randomize ProcessObject.executionTime
+            var randomB = (20..40).shuffled().first()
+            telemetryTotalProcessExecutionTime = telemetryTotalProcessExecutionTime + randomB
+            //creates an object with set variables
+            processArray[i] = ProcessObject(randomA, randomB)
             i++
         }
     }

@@ -5,7 +5,7 @@ class SJF{
         //time quant to subtract from execution time
         var timeQuant = 1
         //counts the current time quant
-        var turnCounter = 0        
+        var turnCounter = 0       
         //flag for stopping the funcition
         var flag = 0
         //creation of empty queue with global access
@@ -13,6 +13,15 @@ class SJF{
 
         //execution of the shortest processs
         fun executioner(processArray : Array<ProcessTestGenerator.ProcessObject?>){
+            //calculate longest wait time in the process queue
+            var longestWaitTime = 0
+            var lastEntryPlace = proceessArray.size - 1
+            var i = 0
+            while(i < lastEntryPlace){
+                longestWaitTime = longestWaitTime + proceessArray[i]
+                i++
+            }
+             
             //starts repeating the execution until the flag is changed
             while(flag == 0){
                 //call for queue creator
