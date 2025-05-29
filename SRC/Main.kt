@@ -14,9 +14,8 @@ class Main{
                 println("#------------------------------------------------#")
                 println("# Choose one of the options:                     #")
                 println("# [1] Start process scheduel simulation          #")
-                println("# [2] Start FIFO page algorithm                  #")
-                println("# [3] Start MFU page algorithm                   #")
-                println("# [4] Quit                                       #")
+                println("# [2] Start page algorithm simulation            #")
+                println("# [3] Quit                                       #")
                 println("##################################################")
                 
                 //exception handling
