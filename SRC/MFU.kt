@@ -52,13 +52,3 @@ class MFU{
         }
     }
 }
-
-
-fun main(){
-    var newGenerator = PagesGenerator.generator()
-    var arr = newGenerator.createPages(10)
-
-    var MFUAl = MFU.Frame()
-    MFUAl.managePages(4, arr)
-
-}

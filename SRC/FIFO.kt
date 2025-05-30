@@ -39,13 +39,3 @@ class FIFO{
         }
     }
 }
-
-
-fun main(){
-    var newGenerator = PagesGenerator.generator()
-    var arr = newGenerator.createPages(10)
-
-    var FIFOAl = FIFO.Frame()
-    FIFOAl.managePages(4, arr)
-
-}
