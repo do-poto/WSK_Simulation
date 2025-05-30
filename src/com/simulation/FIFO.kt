@@ -12,7 +12,6 @@ class FIFO{
             var frameQueue : Queue<Int> = LinkedList()
             //creates actual queue size
             var currentQueueSize : Int = 0
-            println(pagesArray.joinToString())
             //iterates through all of the proceess in the pagesArray
             for(page in pagesArray){
                 //check if he size is greater than expected

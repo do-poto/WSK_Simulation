@@ -13,9 +13,10 @@ class CLI{
                 println("# WSK Simulation Project                         #")
                 println("#------------------------------------------------#")
                 println("# Choose one of the options:                     #")
-                println("# [1] Start process scheduel simulation          #")
-                println("# [2] Start page algorithm simulation            #")
-                println("# [3] Quit                                       #")
+                println("# [1] Start page algorithm simulation            #")
+                println("# [2] Round Robin                                #")
+                println("# [3] Shortest Job First                         #")
+                println("# [4] Quit                                       #")
                 println("##################################################")
                 
                 //exception handling
@@ -24,9 +25,10 @@ class CLI{
                     
                     //Establish which option chosen
                     when(case){
-                        1 -> startProcessTesting()
-                        2 -> startPageTesting()
-                        3 -> quitInterface()
+                        1 -> startPageTesting()
+                        2 -> startRR()
+                        3 -> startSJF()
+                        4 -> quitInterface()
                         else -> println("Invalid input. Choose from options above.")
                     }
                 } catch(e: Exception){
@@ -37,9 +39,7 @@ class CLI{
 
             }
         }
-
-        //function that starts testing processes in a given way
-        fun startProcessTesting(){
+        fun startRR(){
             println("\n##################################################")
             println("# Choose one of the test cases:                  #")
             println("# [1] Fully random                               #")
@@ -55,42 +55,77 @@ class CLI{
                 var processAmount : Int = readln().toInt()
 
                 //initalize process objects
-                var processGenerator = ProcessTestGenerator.TestGenerator(proceessTestingType, processAmount)
+                var processGenerator = ProcessTestGenerator.TestGenerator(processAmount, proceessTestingType)
+                //create process array
                 processGenerator.fillProcessArray()
                 var processGeneratorArray = processGenerator.processArray
-
-                //sort by arrival time
+                
+                //intialize sort
                 var arrivalSorter = ArrivalTimeSort.quickSort()
+                //sort the array
                 var arraySize = processGeneratorArray.size - 1
                 arrivalSorter.sort(processGeneratorArray, 0, arraySize)
                 
-                //make exact copy of array for round robin
-                var firstExactArrayCopy = processGeneratorArray.copyOf()
                 //start round robin type execution
                 var newRoundRobin = RoundRobin.startExecution()
-                newRoundRobin.executioner(firstExactArrayCopy)
-
-                //make second exact copy for shortest job first
-                var secondExactArrayCopy = processGeneratorArray.copyOf()
-                //start shortest job first type execution
-                var newSJF = SJF.startExecution()
-                newSJF.executioner(secondExactArrayCopy)
+                newRoundRobin.executioner(processGeneratorArray)
 
                 //print results
                 println("\n#################################################")
-                println("Functions telemetry                              ")
+                println("Telemetry")
                 println("-------------------------------------------------")
-                println("Round robin                                      ")
+                println("Round robin\n                                      ")
                 println("Total time quants given: " + newRoundRobin.turnCounter)
                 println("Total time quants given: " + newRoundRobin.timeQuantsWasted)
                 println("Total round done: " + newRoundRobin.roundCounter)
+                println("#################################################")
+                
+                //finish program
+                flag = 1
+                
+            } catch(e: Exception){
+                println("Invalid input. Provide integers!")
+            }
+        }
+
+        fun startSJF(){
+            println("\n##################################################")
+            println("# Choose one of the test cases:                  #")
+            println("# [1] Fully random                               #")
+            println("# [2] Random execution time                      #")
+            println("# [3] Random arrival time                        #")
+            println("# [4] Fully random with heavy execution time     #")
+            println("##################################################")           
+            
+            try{
+                //gather inputs from the user
+                var proceessTestingType : Int = readln().toInt()
+                println("Input amount of processes:")
+                var processAmount : Int = readln().toInt()
+
+                //initalize process objects
+                var processGenerator = ProcessTestGenerator.TestGenerator(processAmount, proceessTestingType)
+                //create process array
+                processGenerator.fillProcessArray()
+                var processGeneratorArray = processGenerator.processArray
+                
+                //intialize sort
+                var arrivalSorter = ArrivalTimeSort.quickSort()
+                //sort the array
+                var arraySize = processGeneratorArray.size - 1
+                arrivalSorter.sort(processGeneratorArray, 0, arraySize)
+                
+                //start round robin type execution
+                var newSJF = SJF.startExecution()
+                newSJF.executioner(processGeneratorArray)
+
+                //print results
+                println("\n#################################################")
+                println("Telemetry")
                 println("-------------------------------------------------")
-                println("Shortest Job First")
-                println("Total time quants given:" + newSJF.turnCounter)
-                println("Longest wait time:" + newSJF.longestWaitTime)
-                println("-------------------------------------------------")
-                println("General")
-                println("Total time quants requred:" + processGenerator.telemetryTotalProcessExecutionTime)
+                println("Shortest Job First \n")
+                println("Total time quants given: " + newSJF.turnCounter)
+                println("Longest wait time: " + newSJF.longestWaitTime)
                 println("#################################################")
                 
                 //finish program
