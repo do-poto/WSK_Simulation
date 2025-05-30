@@ -57,24 +57,3 @@ class ExecutionTimeSort(){
 
 
 }
-
-fun main(){
-    val generator = ProcessTestGenerator.TestGenerator(10, 1)
-    generator.fillProcessArray()
-    val array = generator.processArray
-
-    var mysort = ExecutionTimeSort.quickSort()
-    var size = array.size-1
-
-    println("Pre sort")
-    for (x in array){
-        println(x?.executionTime)
-    }
-    
-    mysort.sort(array, 0, size)
-    println("Post sort")
-    for (x in array){
-        println(x?.executionTime)
-    }
-
-}

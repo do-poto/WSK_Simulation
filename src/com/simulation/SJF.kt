@@ -70,32 +70,3 @@ class SJF{
         }
     }
 }
-
-fun main(){
-    var generator = ProcessTestGenerator.TestGenerator(100, 1)
-    generator.fillProcessArray()
-    var array = generator.processArray
-    println("Before sort")
-    for(items in array){
-        println("Arrival: " + items?.arrivalTime + " Exec: " + items?.executionTime)
-    }
-
-    var sort = ArrivalTimeSort.quickSort()
-    var size = array.size -1
-    sort.sort(array, 0, size)
-    println("After sort")
-    for(items in array){
-        println("Arrival: " + items?.arrivalTime + " Exec: " + items?.executionTime)
-    }
-    
-    var shortestJob = SJF.startExecution()
-    shortestJob.executioner(array)
-
-    println("After execution")
-    for(items in array){
-        println("Arrival: " + items?.arrivalTime + " Exec: " + items?.executionTime)
-    }
-    println("Total time quants granted: " + shortestJob.turnCounter)
-    println("Total time quants needed: " + generator.telemetryTotalProcessExecutionTime)
-
-}
