@@ -38,7 +38,7 @@ class RoundRobin{
             roundCounter += 1
         }
         for(process in processArray){
-            if(process.executionTime < 0){
+            if(process!!.executionTime < 0){
                 timeQuantsWasted = timeQuantsWasted + process.executionTime
             }
         }

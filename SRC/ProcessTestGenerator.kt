@@ -23,10 +23,7 @@ class ProcessTestGenerator{
             2 -> randomExecution()
             3 -> randomArrival()
             4 -> randomHeavy()
-            else -> {
-                println("Invalid input")
-                exitProcess(-1)
-            } 
+            else -> println("Invalid input")
         }
     }
 

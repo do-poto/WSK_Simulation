@@ -2,15 +2,14 @@ import java.util.*
 
 class MFU{
     class Frame{
+        //page miss count
+        var pageMissCount = 0
+        //page hit count
+        var pageHitCount = 0
         //creates frame for the algorithm
         fun managePages(frameSize : Int, pagesArray : IntArray){
-            //page miss count
-            var pageMissCount = 0
-            //page hit count
-            var pageHitCount = 0
             //intialize array of int of certain size
             var frameArray = IntArray(frameSize)
-
             //start process
             for(pageOS in pagesArray){
                 var target = pageOS

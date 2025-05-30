@@ -8,17 +8,18 @@ class SJF{
         var turnCounter = 0       
         //flag for stopping the funcition
         var flag = 0
+        //initlaize longest wait time var
+        var longestWaitTime = 0
         //creation of empty queue with global access
         var processQueue : Queue<ProcessTestGenerator.ProcessObject?> = LinkedList()
 
         //execution of the shortest processs
         fun executioner(processArray : Array<ProcessTestGenerator.ProcessObject?>){
-            //calculate longest wait time in the process queue
-            var longestWaitTime = 0
-            var lastEntryPlace = proceessArray.size - 1
+            //calculate longest wait time
+            var lastEntryPlace = processArray.size - 1
             var i = 0
             while(i < lastEntryPlace){
-                longestWaitTime = longestWaitTime + proceessArray[i]
+                longestWaitTime = longestWaitTime + processArray[i]!!.executionTime
                 i++
             }
              
