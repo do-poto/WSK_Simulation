@@ -1,10 +1,6 @@
 class ProcessTestGenerator{
     //class of ProcessObject that will be added to the TestGenerator
     class ProcessObject(var arrivalTime: Int, var executionTime : Int){
-        //Function for decrementing the value of the object
-        fun decrement(timeQuantProvided : Int){
-            var executionTime = executionTime - timeQuantProvided
-        }
     }
     
     /*initialize class of TestGenerator that will provide
