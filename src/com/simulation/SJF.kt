@@ -16,7 +16,7 @@ class SJF{
         //execution of the shortest processs
         fun executioner(processArray : Array<ProcessTestGenerator.ProcessObject?>){
             //calculate longest wait time
-            var lastEntryPlace = processArray.size - 1
+            var lastEntryPlace : Int = processArray.size - 1
             var i = 0
             while(i < lastEntryPlace){
                 //add all processes that will be before it 
@@ -24,7 +24,7 @@ class SJF{
                 i++
             }
             //subtract its arrival time
-            longestWaitTime = longestWaitTime - proceess[lastEntryPlace]!!.arrivalTime
+            longestWaitTime = longestWaitTime - processArray[lastEntryPlace]!!.arrivalTime
 
             //starts repeating the execution until the flag is changed
             while(flag == 0){
