@@ -19,10 +19,13 @@ class SJF{
             var lastEntryPlace = processArray.size - 1
             var i = 0
             while(i < lastEntryPlace){
+                //add all processes that will be before it 
                 longestWaitTime = longestWaitTime + processArray[i]!!.executionTime
                 i++
             }
-             
+            //subtract its arrival time
+            longestWaitTime = longestWaitTime - proceess[lastEntryPlace]!!.arrivalTime
+
             //starts repeating the execution until the flag is changed
             while(flag == 0){
                 //call for queue creator
